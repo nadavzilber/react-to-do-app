@@ -12,6 +12,7 @@ const authenticate = async () => {
 };
 
 const getExistingData = async (sheetIndex=29) => {
+  console.log('getExisting for index:',sheetIndex)
   //sheet 29 = tasks
   //sheet 30 - 5mj-morning
   sheet = doc.sheetsByIndex[sheetIndex];

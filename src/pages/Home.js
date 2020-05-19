@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TasksContainer from "../components/TasksContainer";
+import FormContainer from "../components/FormContainer";
 import "./home-style.css";
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
   const renderComponent = (page) => {
     switch (page) {
       case "5MJ-Morning":
-        return <h1>5MJ-Morning</h1>;
+        return <FormContainer formName="Five Minute Journal - Morning"/>;
       case "Tasks":
         return <TasksContainer />;
       default:
