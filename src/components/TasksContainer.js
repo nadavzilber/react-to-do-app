@@ -6,7 +6,8 @@ import {
   updateRow,
   deleteRow,
   getExistingData,
-} from "./SpreadSheet";
+} from "../services/SpreadSheet";
+import "../App.css";
 
 const TasksContainer = () => {
   const newTaskInput = useRef(null);
@@ -17,19 +18,12 @@ const TasksContainer = () => {
     // { id: 4, msg: "then do that", isChecked: false },
     // { id: 5, msg: "and this", isChecked: false },
   ]);
-  const [fetchingData, setFetchingData] = useState(true);
+  const [isFetchingData, setIsFetching] = useState(true);
 
   useEffect(() => {
-    console.log("env:::::>", process.env.REACT_APP_GOOGLE_SHEETS_API_KEY);
-    console.log("TODO: move the config to root or to the .env file");
-    console.log("useEffect");
     const fetchData = async () => {
-      console.log("fetchData");
-      // You can await here
-      //const response = await MyAPI.getData(someId);
       await authenticate();
       let existingData = await getExistingData();
-      console.log("existingData ====> ", existingData);
       let newTaskList = existingData.map((row) => {
         return {
           id: row.id,
@@ -38,10 +32,8 @@ const TasksContainer = () => {
           date: row.date,
         };
       });
-      console.log("newTaskList:", newTaskList);
       await setTaskList(newTaskList);
-      console.log("UPDATED TASK LIST:", taskList);
-      setFetchingData(false);
+      await setIsFetching(false);
     };
     fetchData();
   }, []);
@@ -62,7 +54,6 @@ const TasksContainer = () => {
 
   const addTask = async () => {
     let tempTasks = [...taskList];
-    console.log("taskList[taskList.length]", taskList[taskList.length - 1]);
     let newTask = {
       id:
         taskList.length > 0
@@ -118,7 +109,7 @@ const TasksContainer = () => {
 
   return (
     <>
-      {fetchingData ? (
+      {isFetchingData ? (
         <h4>Fetching Data</h4>
       ) : (
         <div className="tasks-container">

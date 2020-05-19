@@ -1,0 +1,14 @@
+.selection-form {
+  display: flex;
+  justify-content: space-between;
+}
+.selection-radio {
+  margin: 5px;
+  padding: 10px;
+}
+.selection-radio p {
+  font-family: "Roboto Condensed", Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 100;
+  line-height: 56px;
+}
